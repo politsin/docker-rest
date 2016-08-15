@@ -1,4 +1,4 @@
 #!/bin/bash
 
-cd "/opt/docker-proxy
-docker-compose up -d docker-proxy
+cd /opt/docker-rest
+docker-compose up -d docker-rest
