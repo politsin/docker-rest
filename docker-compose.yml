@@ -1,13 +1,13 @@
-nginx-rest :
+docker-rest :
  image: nginx:alpine
- container_name: nginx-rest
- hostname: nginx-rest
+ container_name: docker-rest
+ hostname: docker-rest
  restart: always
  ports:
   - "11666:80"
  volumes:
-  - "/opt/nginx-rest/nginx.conf:/etc/nginx/nginx.conf:ro"
-  - "/opt/nginx-rest/.passwd:/etc/nginx/.passwd:ro"
-  - "/opt/nginx-rest/ssl:/etc/nginx/ssl:ro"
-  - "/opt/nginx-rest/www:/var/www:ro"
+  - "/opt/docker-rest/nginx.conf:/etc/nginx/nginx.conf:ro"
+  - "/opt/docker-rest/.passwd:/etc/nginx/.passwd:ro"
+  - "/opt/docker-rest/ssl:/etc/nginx/ssl:ro"
+  - "/opt/docker-rest/www:/var/www:ro"
   - "/var/run/docker.sock:/var/run/docker.sock:rw"
