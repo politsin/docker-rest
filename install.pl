@@ -31,6 +31,9 @@ if ( $docker_check == 0 ) {
   print "PASS: $passwd\n";
   system("htpasswd -bc /opt/docker-rest/.passwd synapse $passwd");
   system("echo $passwd > /opt/docker-rest/passwd");
+  
+  chdir("/opt/docker-rest");
+  system("docker-compose up -d docker-rest");
 }else{
   print "allready done \n";
 }
