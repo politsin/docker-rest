@@ -3,6 +3,14 @@
 use strict;
 use warnings;
 
+my $passwd  = $ARGV[0];
+
+if (!$passwd){
+  my @chars = ("A".."Z", "a".."z");
+  my $string;
+  $passwd .= $chars[rand @chars] for 1..12;
+}
+
 my $docker_check = `dpkg -l | grep -c docker-engine`;
 chomp($docker_check);
 if ( $docker_check == 0 ) {
@@ -19,6 +27,10 @@ if ( $docker_check == 0 ) {
   system("curl -L https://github.com/docker/compose/releases/download/1.7.0/docker-compose-`uname -s`-`uname -m` > /usr/bin/docker-compose");
   system("chmod +x /usr/bin/docker-compose");
   system("echo 'Europe/Moscow' > /etc/timezone");
+  
+  print "PASS: $passwd\n";
+  system("htpasswd -bc /opt/docker-rest/.passwd synapse $passwd");
+  system("echo $passwd > /opt/docker-rest/passwd");
 }else{
   print "allready done \n";
 }
