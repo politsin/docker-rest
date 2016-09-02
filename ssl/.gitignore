@@ -1,4 +1,4 @@
 # Git ignore keys
 
-proxy.key
-proxy.crt
+rest.key
+rest.crt
