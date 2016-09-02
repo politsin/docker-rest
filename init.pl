@@ -21,5 +21,5 @@ if (1){
 if(-e $keys){
   print "Keys Exist\n";
 }else{
-  system("openssl req -x509 -nodes -days 9000 -newkey rsa:2048 -keyout /opt/docker-rest/ssl/proxy.key -out /opt/docker-rest/ssl/proxy.crt");
+  system("openssl req -x509 -nodes -days 9000 -newkey rsa:2048 -keyout /opt/docker-rest/ssl/rest.key -out /opt/docker-rest/ssl/rest.crt");
 }
