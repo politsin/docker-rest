@@ -24,7 +24,7 @@ if ( $docker_check == 0 ) {
   system("apt-get install -qq docker-engine apache2-utils htop -y");
   system("echo 'DOCKER_OPTS=\"-H unix:///var/run/docker.sock\"' >> /etc/default/docker");
   system("service docker restart");
-  system("curl -L https://github.com/docker/compose/releases/download/1.7.0/docker-compose-`uname -s`-`uname -m` > /usr/bin/docker-compose");
+  system("curl -L https://github.com/docker/compose/releases/download/1.21.0/docker-compose-`uname -s`-`uname -m` > /usr/bin/docker-compose");
   system("chmod +x /usr/bin/docker-compose");
   system("echo 'Europe/Moscow' > /etc/timezone");
   
