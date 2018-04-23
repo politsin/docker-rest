@@ -15,13 +15,12 @@ my $docker_check = `dpkg -l | grep -c docker-engine`;
 chomp($docker_check);
 if ( $docker_check == 0 ) {
   system("apt-get update");
-  system("apt-get install -qq apt-transport-https ca-certificates curl -y");
-  system("apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D");
-  system("echo \"deb https://apt.dockerproject.org/repo ubuntu-xenial main\" >> /etc/apt/sources.list.d/docker.list");
+  system("apt-get install curl apt-transport-https ca-certificates software-properties-common -y");
+  system("curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -");
+  system("add-apt-repository \"deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable\"");
   system("apt-get update");
-  system("apt-get purge lxc-docker");
-  system("apt-get install -qq -y linux-image-extra-\$(uname -r)");
-  system("apt-get install -qq docker-engine apache2-utils htop -y");
+  system("apt-get install docker-ce -y");
+  system("apt-get install apache2-utils htop mc -y");
   system("echo 'DOCKER_OPTS=\"-H unix:///var/run/docker.sock\"' >> /etc/default/docker");
   system("service docker restart");
   system("curl -L https://github.com/docker/compose/releases/download/1.21.0/docker-compose-`uname -s`-`uname -m` > /usr/bin/docker-compose");
