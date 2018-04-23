@@ -33,6 +33,7 @@ if ( $docker_check == 0 ) {
   
   chdir("/opt/docker-rest");
   system("docker-compose up -d docker-rest");
-}else{
+}
+else{
   print "allready done \n";
 }
