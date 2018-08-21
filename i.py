@@ -12,6 +12,7 @@ import platform
 passw = ""
 docker = "docker-ce"
 compose = "1.21.2"
+ubuntu = True
 
 # Set Pass form ARG or GEN
 if 1 < len(sys.argv):
@@ -25,13 +26,19 @@ docker_check = os.system('dpkg -l | grep -c %s' % (docker))
 if (docker_check):
     os.system('apt-get update')
     os.system('apt-get install -y apt-transport-https ca-certificates curl gnupg2 software-properties-common')
-    os.system('curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -')
-    os.system('apt-key fingerprint 0EBFCD88')
-    ostype = platform.dist()[0]
-    deb = "https://download.docker.com/linux/%s $(lsb_release -cs) stable" % (ostype)
-    os.system('add-apt-repository "deb [arch=amd64] %s"' % (deb))
-    os.system('apt-get update')
-    os.system('apt-get install -y --force-yes docker-ce')
+    if (ubuntu):
+      os.system('curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -')
+      os.system('add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu `lsb_release -cs` stable"')
+      os.system('apt-get update')
+      os.system('apt install -y --force-yes docker-ce')
+    else:
+      os.system('curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add -')
+      os.system('apt-key fingerprint 0EBFCD88')
+      ostype = platform.dist()[0]
+      deb = "https://download.docker.com/linux/%s $(lsb_release -cs) stable" % (ostype)
+      os.system('add-apt-repository "deb [arch=amd64] %s"' % (deb))
+      os.system('apt-get update')
+      os.system('apt-get install -y --force-yes docker-ce')
     os.system("echo 'DOCKER_OPTS=\"-H unix:///var/run/docker.sock\"' >> /etc/default/docker")
     os.system("service docker restart")
     os.system("curl -L https://github.com/docker/compose/releases/download/%s/docker-compose-`uname -s`-`uname -m` > /usr/bin/docker-compose" % (compose))
