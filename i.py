@@ -11,7 +11,7 @@ import platform
 # Vars
 passw = ""
 docker = "docker-ce"
-compose = "1.21.2"
+compose = "1.23.2"
 ubuntu = True
 
 # Set Pass form ARG or GEN
