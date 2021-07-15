@@ -23,7 +23,7 @@ apt install -y -qq \
     inetutils-ping \
     software-properties-common
 apt install -y -qq docker docker-compose
-apt install -y -qq telegraf
+# apt install -y -qq telegraf
 cd /opt/docker-rest
 
 PASS=$(LC_ALL=C tr -dc '[:alnum:]' < /dev/urandom | head -c20)
