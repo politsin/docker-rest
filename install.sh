@@ -2,7 +2,24 @@
 
 
 apt update
-apt install docker docker-compose
+apt remove -y exim4-base exim4-config exim4-daemon-light
+apt upgrade -y
+apt autoremove -y
+apt install -y -qq \
+  apt-transport-https \
+  ca-certificates \
+  apache2-utils \
+  mc \
+  git \
+  htop \
+  curl \
+  python3 \
+  telegraf \
+  dnsutils \
+  net-tools \
+  inetutils-ping \
+  software-properties-common
+apt install -y -qq docker docker-compose
 cd /opt/docker-rest
 
 PASS=$(LC_ALL=C tr -dc '[:alnum:]' < /dev/urandom | head -c20)
