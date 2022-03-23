@@ -11,12 +11,12 @@ apt install -y -qq \
     apache2-utils \
     mc \
     git \
+    nnn \
     zip \
     htop \
     curl \
     ncdu \
     unzip \
-    ranger \
     python3 \
     dnsutils \
     net-tools \
