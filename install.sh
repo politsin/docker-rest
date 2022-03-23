@@ -23,9 +23,17 @@ apt install -y -qq \
     inetutils-ping \
     software-properties-common
 apt install -y -qq docker docker-compose
-# apt install -y -qq telegraf
-cd /opt/docker-rest
+docker --version && docker-compose --version
 
+# Telegraf.
+wget -qO- https://repos.influxdata.com/influxdb.key | sudo apt-key add -
+source /etc/lsb-release
+echo "deb https://repos.influxdata.com/${DISTRIB_ID,,} ${DISTRIB_CODENAME} stable" | sudo tee /etc/apt/sources.list.d/influxdb.list
+apt update
+apt install telegraf
+
+# Setup.
+cd /opt/docker-rest
 PASS=$(LC_ALL=C tr -dc '[:alnum:]' < /dev/urandom | head -c20)
 if [ -z "$1" ]; then
   PASS=$1
