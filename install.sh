@@ -22,7 +22,7 @@ apt install -y -qq \
     net-tools \
     inetutils-ping \
     software-properties-common
-apt install -y -qq docker docker-compose
+apt install -y -qq docker.io docker-compose
 docker --version && docker-compose --version
 
 # Setup.
